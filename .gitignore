@@ -64,3 +64,6 @@ yarn-error.log
 
 # testing
 /coverage
+
+# not adding .env to the requirements just for this project submit
+#.env
