@@ -1,4 +1,3 @@
-// api/apiService.js
 import ENDPOINTS from './endpints';
 import { httpService } from './httpService';
 
@@ -48,4 +47,5 @@ const updateTask = async (payload, taskId) => {
       throw error;
     }
   };
+
 export { getTodolist, postTask, updateTask, deleteTask };

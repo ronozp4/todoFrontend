@@ -1,7 +1,7 @@
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import EditIcon from '../assets/icons/edit-64.png'
-import DeleteIcon from '../assets/icons/delete-100.png'
+import EditIcon from '../assets/icons/edit.png'
+import DeleteIcon from '../assets/icons/delete.png'
 import { screens } from '../utils/constants';
 import { useNavigation } from '@react-navigation/native';
 import store from '../stores/mobxStore';

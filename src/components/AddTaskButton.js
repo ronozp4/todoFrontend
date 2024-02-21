@@ -1,6 +1,6 @@
 import { Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-import Plus from '../assets/icons/plus-button-128.png'
+import Plus from '../assets/icons/plus-button.png'
 import { useNavigation } from '@react-navigation/native';
 import { screens } from '../utils/constants';
 

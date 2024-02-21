@@ -10,12 +10,13 @@ import taskIcon from '../assets/icons/task.png'
 
 const TaskControl = ({ route }) => {
 
-    const { reset, register, handleSubmit, control, formState: { errors }, } = useForm()
+    const { reset, handleSubmit, control, formState: { errors }, } = useForm()
     const nav = useNavigation();
     const [isEdit, setIsEdit] = useState(false)
+    const [isBtnDisabled, setBtnDisabledt] = useState(false) // disable button spam
+
     useEffect(() => {
         if (route?.params) {
-            console.log('route?.params', route?.params)
             setIsEdit(true)
             reset({
                 title: store.todolist[route?.params.index].title,
@@ -25,24 +26,18 @@ const TaskControl = ({ route }) => {
     }, [reset])
 
     const onSubmit = useCallback( async(formData) => {
+        setBtnDisabledt(true)
         const compliteTask = { ...formData, ...{ done: false } }
+
         if (route?.params) {
             updateTask(formData,store.todolist[route?.params.index]._id )
             store.updateTaskById(route?.params.index, compliteTask)
-            nav.navigate('Home')
-
         } else {
             const res = await postTask(compliteTask)
             store.addTask({...compliteTask, ...{_id: res.insertedId}})
-            
-            nav.navigate('Home')
         }
+        nav.navigate('Home')
     }, []);
-
-    useEffect(() => {
-        register('title', { required: true });
-        register('description');
-    }, [register]);
 
     return (
         <>
@@ -78,7 +73,7 @@ const TaskControl = ({ route }) => {
                     name="description"
                 />
                 <View style={styles.submitButton}>
-                    <Button title={isEdit ? ' Edit ' : 'Add New'} onPress={handleSubmit(onSubmit)} />
+                    <Button disabled={isBtnDisabled} title={isEdit ? ' Edit ' : 'Add New'} onPress={handleSubmit(onSubmit)} />
                 </View>
             </View>
         </>
