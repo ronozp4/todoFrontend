@@ -1,36 +1,37 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import TaskItem from '../components/TaskItem'
-import { fetchData } from '../api/apiService'
-import MovableButton from '../components/AddButton'
+import { getTodolist } from '../api/apiService'
 import AddTaskButton from '../components/AddTaskButton'
+import store from '../stores/mobxStore'
+import { observer } from 'mobx-react-lite'
+import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 
 const Home = () => {
-    const [todoList, setTodoList] = useState([])
 
-    useEffect(()=>{
+    useEffectUpdate(()=>{
         const getData = async ()=> {
-            const data = await fetchData()
-            setTodoList(data)
+            const data = await getTodolist() 
+            store.setTodoList(data)
         }
         getData()
     },[])
+
   return (
     <View style={{flex: 1, paddingBottom: 20}}>
       <Text style={styles.title}>ToDo List!</Text>
-      <FlatList
+      <FlatList 
       contentContainerStyle={{paddingBottom: 70}}
-        data={todoList}
-        renderItem={({item}) => <TaskItem task={item} />}
-        keyExtractor={(item) => item.id}
+        data={store.todolist} 
+        renderItem={({index}) => <TaskItem key={index} index={index} />}
+        keyExtractor={(item) => item._id} 
       />
-      {/* <MovableButton /> */}
       <AddTaskButton />
     </View>
   )
 }
 
-export default Home
+export default observer(Home) 
 
 const styles = StyleSheet.create({
     title: {

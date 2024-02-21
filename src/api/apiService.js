@@ -3,7 +3,7 @@ import ENDPOINTS from './endpints';
 import { httpService } from './httpService';
 
 
-const fetchData = async () => {
+const getTodolist = async () => {
   try {
     const response = await httpService.get(ENDPOINTS.GET_TODOLIST);
     return response;
@@ -13,9 +13,9 @@ const fetchData = async () => {
   }
 };
 
-const postData = async (payload) => {
+const postTask = async (payload) => {
   try {
-    const response = await httpService.post(ENDPOINTS.POST_DATA, payload);
+    const response = await httpService.post(ENDPOINTS.POST_TASK, payload);
     return response;
   } catch (error) {
     console.error('Error posting data:', error);
@@ -23,4 +23,29 @@ const postData = async (payload) => {
   }
 };
 
-export { fetchData, postData };
+const updateTask = async (payload, taskId) => {
+    try {
+      if(!taskId){
+        throw new Error('missing id')
+      }
+      const response = await httpService.put(ENDPOINTS.UPDATE_TASK + taskId , payload);
+      return response;
+    } catch (error) {
+      console.error('Error updating data:', error);
+      throw error;
+    }
+  };
+
+  const deleteTask = async (taskId) => {
+    try {
+      if(!taskId){
+        throw new Error('missing id')
+      }
+      const response = await httpService.delete(ENDPOINTS.DELETE_TASK + taskId);
+      return response;
+    } catch (error) {
+      console.error('Error posting data:', error);
+      throw error;
+    }
+  };
+export { getTodolist, postTask, updateTask, deleteTask };

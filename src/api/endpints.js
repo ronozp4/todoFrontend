@@ -1,7 +1,8 @@
 const ENDPOINTS = {
-    GET_TODOLIST: 'todolist',
-    POST_TASK: 'data',
-    // Add more endpoints as needed
+    GET_TODOLIST: 'tasks',
+    POST_TASK: 'tasks',
+    UPDATE_TASK: 'tasks/',
+    DELETE_TASK: 'tasks/',
   };
   
   export default ENDPOINTS;

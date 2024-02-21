@@ -2,29 +2,29 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import EditIcons from './EditIcons'
 import CheckBox from './CheckBox'
+import store from '../stores/mobxStore'
+import { observer } from 'mobx-react-lite'
 
-const TaskItem = ({task}) => {
+const TaskItem = ({index}) => {
     const [isOpen, setIsOpen] = useState(false)
-
+    const theTask = store.todolist[index]
   return (
     <>
     <View style={styles.main}>
-    <EditIcons />
+    <EditIcons index={index} />
         <TouchableOpacity onPress={()=>setIsOpen(!isOpen)} style={styles.container}>
-        <Text style={[styles.title, {textDecorationLine: 'line-through'}]}>{task?.title}</Text>
+        <Text style={[styles.title, theTask?.done && {textDecorationLine: 'line-through'}]}>{theTask?.title}</Text>
         </TouchableOpacity>
-    <CheckBox />
+    <CheckBox index={index} />
     </View>
-            {isOpen? <View style={[styles.container,{width: '90%', alignSelf: 'center'}]}>
-            <Text>{task?.description}</Text>
-        <Text>{task?.status}</Text>
-        <Text>{task?.time}</Text>
+            {isOpen && theTask?.description ? <View style={[styles.container,{width: '90%', alignSelf: 'center'}]}>
+            <Text>{theTask?.description}</Text>
         </View>: null}
         </>
   )
 }
 
-export default TaskItem
+export default observer(TaskItem) 
 
 const styles = StyleSheet.create({
     main: {
