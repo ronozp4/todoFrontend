@@ -17,7 +17,7 @@ const TaskItem = ({index}) => {
         </TouchableOpacity>
     <CheckBox index={index} />
     </View>
-            {isOpen && theTask?.description ? <View style={[styles.container,{width: '90%', alignSelf: 'center'}]}>
+            {isOpen && theTask?.description ? <View style={[styles.container,styles.description]}>
             <Text>{theTask?.description}</Text>
         </View>: null}
         </>
@@ -42,5 +42,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '600',
         textDecorationColor: 'red',
+    },
+    description: {
+        width: '90%', 
+        alignSelf: 'center'
     }
 })

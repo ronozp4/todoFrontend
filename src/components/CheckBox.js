@@ -11,7 +11,7 @@ const CheckBox = ({index}) => {
 
     const toggleCheckbox = ()=> {
         updateTask({done: !theTask?.done}, theTask?._id)
-        store.updateTaskById(index, {done: !theTask?.done})
+        store.updateTaskIndex(index, {done: !theTask?.done})
     }
   return (
     <TouchableOpacity onPress={toggleCheckbox}>

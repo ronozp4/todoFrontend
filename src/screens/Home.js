@@ -18,10 +18,10 @@ const Home = () => {
     },[])
 
   return (
-    <View style={{flex: 1, paddingBottom: 20}}>
+    <View style={styles.container}>
       <Text style={styles.title}>ToDo List!</Text>
       <FlatList 
-      contentContainerStyle={{paddingBottom: 70}}
+        contentContainerStyle={styles.flatList}
         data={store.todolist} 
         renderItem={({index}) => <TaskItem key={index} index={index} />}
         keyExtractor={(item) => item._id} 
@@ -34,6 +34,13 @@ const Home = () => {
 export default observer(Home) 
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1, 
+      paddingBottom: 20
+    },
+    flatList: {
+      paddingBottom: 70
+    },
     title: {
         fontSize: 40,
         color: '#2AAA8A',

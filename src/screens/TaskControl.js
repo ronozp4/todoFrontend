@@ -31,7 +31,7 @@ const TaskControl = ({ route }) => {
 
         if (route?.params) {
             updateTask(formData,store.todolist[route?.params.index]._id )
-            store.updateTaskById(route?.params.index, compliteTask)
+            store.updateTaskIndex(route?.params.index, compliteTask)
         } else {
             const res = await postTask(compliteTask)
             store.addTask({...compliteTask, ...{_id: res.insertedId}})

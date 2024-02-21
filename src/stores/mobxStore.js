@@ -22,8 +22,8 @@ class mobxStore {
         this.todolist = [...this.todolist]
     }
 
-    updateTaskById = (taskId, data) => {
-        this.todolist[taskId] = { ...this.todolist[taskId], ...data }
+    updateTaskIndex = (taskIndex, data) => {
+        this.todolist[taskIndex] = { ...this.todolist[taskIndex], ...data }
     }
 
 }
